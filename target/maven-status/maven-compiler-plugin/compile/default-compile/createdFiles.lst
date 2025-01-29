@@ -1,3 +1,7 @@
-daw/p81lucia/Prueba.class
-daw/p81lucia/Conexion.class
-daw/p81lucia/P81Lucia.class
+Conexion/Conexion.class
+modelo/VeterinarioDTO.class
+modelo/IVeterinario.class
+Conexion/P81Lucia.class
+modelo/MascotaDTO.class
+modelo/IMascota.class
+Conexion/Prueba.class
