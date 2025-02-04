@@ -1,3 +1,7 @@
-/home/lucia/NetBeansProjects/p81Lucia/src/main/java/daw/p81lucia/Prueba.java
-/home/lucia/NetBeansProjects/p81Lucia/src/main/java/daw/p81lucia/Conexion.java
-/home/lucia/NetBeansProjects/p81Lucia/src/main/java/daw/p81lucia/P81Lucia.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/Conexion/P81Lucia.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/modelo/IVeterinario.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/modelo/VeterinarioDTO.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/Conexion/Prueba.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/Conexion/Conexion.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/modelo/IMascota.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/modelo/MascotaDTO.java

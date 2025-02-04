@@ -1,5 +1,5 @@
 
-package daw.p81lucia;
+package Conexion;
 
 
 public class P81Lucia {
