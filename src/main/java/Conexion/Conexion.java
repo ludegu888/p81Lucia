@@ -10,7 +10,7 @@ public class Conexion {
    
     // Estos parámetros de conexión deben ser establecidos en función de 
     // tu servidor y usuario de conexión
-    private static final String SERVIDOR = "jdbc:mysql://127.0.0.1:3306/?";
+    private static final String SERVIDOR = "jdbc:mysql://127.0.0.1:3306/";
     private static final String NOMBRE_BASE_DATOS = "p81Lucia";
     private static final String USER = "lucia";
     private static final String PASS = "plfcgz";

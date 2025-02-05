@@ -1,7 +1,11 @@
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/Modelos/VeterinarioDTO.java
 /home/lucia/NetBeansProjects/p81Lucia/src/main/java/Conexion/P81Lucia.java
-/home/lucia/NetBeansProjects/p81Lucia/src/main/java/modelo/IVeterinario.java
-/home/lucia/NetBeansProjects/p81Lucia/src/main/java/modelo/VeterinarioDTO.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/Controladores/Prueba.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/Modelos/IMascota.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/Modelos/IVeterinario.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/Controladores/VeterinarioDAO.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/Controladores/MascotaDAO.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/Vistas/Main.java
 /home/lucia/NetBeansProjects/p81Lucia/src/main/java/Conexion/Prueba.java
 /home/lucia/NetBeansProjects/p81Lucia/src/main/java/Conexion/Conexion.java
-/home/lucia/NetBeansProjects/p81Lucia/src/main/java/modelo/IMascota.java
-/home/lucia/NetBeansProjects/p81Lucia/src/main/java/modelo/MascotaDTO.java
+/home/lucia/NetBeansProjects/p81Lucia/src/main/java/Modelos/MascotaDTO.java
