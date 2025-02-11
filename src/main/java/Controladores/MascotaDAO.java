@@ -13,164 +13,167 @@ import Modelos.VeterinarioDTO;
 
 public class MascotaDAO implements Modelos.IMascota {
 
-	private Connection con = null;
+    private Connection con = null;
 
-	public MascotaDAO() {
-    	con = Conexion.Conexion.getInstance();
-	}
+    public MascotaDAO() {
+        con = Conexion.Conexion.getInstance();
+    }
 
-	public List<MascotaDTO> getAll() throws SQLException {
-    	List<MascotaDTO> lista = new ArrayList<>();
+    public List<MascotaDTO> getAll() throws SQLException {
+        List<MascotaDTO> lista = new ArrayList<>();
 
-    	try (Statement st = con.createStatement()) {
-        	ResultSet res = st.executeQuery("select * from mascotas");
+        try (Statement st = con.createStatement()) {
+            ResultSet res = st.executeQuery("select * from mascotas");
 
-        	while (res.next()) {
-            	MascotaDTO masc = new MascotaDTO();
+            while (res.next()) {
+                MascotaDTO masc = new MascotaDTO();
 
-            	masc.setIdMasc(res.getInt("pk_masc"));
-            	masc.setIdVet(res.getInt("pk_vet"));
-            	masc.setNombreMasc(res.getString("nombre"));
-            	masc.setFechaNacim(res.getDate("fecha nacimiento").toLocalDate());
-            	masc.setNumChip(res.getInt("num chip"));
-            	masc.setPeso(res.getDouble("peso"));
-            	masc.setTipo(res.getString("tipo"));
+                masc.setIdMasc(res.getInt("idMascota"));
+                masc.setIdVet(res.getInt("idVeterinario"));
+                masc.setNombreMasc(res.getString("nombre"));
+                masc.setNumChip(res.getInt("numChip"));
+                masc.setFechaNacim(res.getDate("fechaNacim").toLocalDate());
+                masc.setPeso(res.getDouble("peso"));
+                masc.setTipo(res.getString("tipo"));
 
-            	lista.add(masc);
-        	}
-    	}
-    	return lista;
-	}
+                lista.add(masc);
+            }
+        }
+        return lista;
+    }
 
-	public MascotaDTO findByPk(int id) throws SQLException {
+    public MascotaDTO findByPk(int idMascota) throws SQLException {
 
-    	ResultSet res = null;
-    	MascotaDTO masc = new MascotaDTO();
+        ResultSet res = null;
+        MascotaDTO masc = new MascotaDTO();
 
-    	String sql = "select * from mascotas where pk=?";
+        String sql = "select * from mascotas where idMascota=?";
 
-    	try (PreparedStatement prest = con.prepareStatement(sql)) {
+        try (PreparedStatement prest = con.prepareStatement(sql)) {
+            // Preparamos la sentencia parametrizada
+            prest.setInt(1, idMascota);
 
-        	prest.setInt(1, id);
+            // Ejecutamos la sentencia y obtenemos las filas en el objeto ResultSet
+            res = prest.executeQuery();
 
-        	res = prest.executeQuery();
+            // Nos posicionamos en el primer registro del Resultset. Sólo debe haber una fila
+            // si existe esa pk
+            if (res.next()) {
+             
+                masc.setIdMasc(res.getInt("idMascota"));
+                masc.setNombreMasc(res.getString("nombre"));
+                masc.setNumChip(res.getInt("numChip"));
+                masc.setPeso(res.getDouble("peso"));
+                masc.setFechaNacim(res.getDate("fechaNacim").toLocalDate());
+                masc.setTipo(res.getString("tipo"));
+                masc.setIdVet(res.getInt("idVeterinario"));
+                return masc;
+            }
 
-        	if (res.next()) {
+            return null;
+        }
+    }
 
-            	masc.setIdMasc(res.getInt("pk_masc"));
-                masc.setNumChip(res.getInt("num chip"));
-            	masc.setNombreMasc(res.getString("nombre"));
-            	masc.setFechaNacim(res.getDate("fecha nacimiento").toLocalDate());
-            	masc.setPeso(res.getDouble("peso"));
-            	masc.setTipo(res.getString("tipo"));
-                masc.setIdVet(res.getInt("pk _vet"));
-            	return masc;
-        	}
-        	return null;
-    	}
-	}
-    
-	public int insertMasc(MascotaDTO masc) throws SQLException {
-    	int numFilas = 0;
-    	String sql = "insert into mascotas values (?,?,?,?,?,?,?)";
+    public int insertMasc(MascotaDTO masc) throws SQLException {
+        int numFilas = 0;
+        String sql = "insert into mascotas values (?,?,?,?,?,?,?)";
 
-    	if (findByPk(masc.getIdMasc()) != null) {
+        if (findByPk(masc.getIdMasc()) != null) {
 
-        	return numFilas;
-    	} else {
-        	try (PreparedStatement prest = con.prepareStatement(sql)) {
+            return numFilas;
+        } else {
+            try (PreparedStatement prest = con.prepareStatement(sql)) {
 
-            	prest.setInt(1, masc.getIdMasc());
-                prest.setInt(3, masc.getNumChip());
-                prest.setString(2, masc.getNombreMasc());
-            	prest.setDate(4, Date.valueOf(masc.getFechaNacim()));
-            	prest.setDouble(5, masc.getPeso());
-            	prest.setString(6, masc.getTipo());
+                prest.setInt(1, masc.getIdMasc());
                 prest.setInt(7, masc.getIdVet());
+                prest.setString(3, masc.getNombreMasc());
+                prest.setInt(2, masc.getNumChip());
+                prest.setDate(5, Date.valueOf(masc.getFechaNacim()));
+                prest.setDouble(4, masc.getPeso());
+                prest.setString(6, masc.getTipo());
 
-            	numFilas = prest.executeUpdate();
-        	}
-        	return numFilas;
-    	}
-	}
+                numFilas = prest.executeUpdate();
+            }
+            return numFilas;
+        }
+    }
 
-	public int insertMasc(List<MascotaDTO> listaMasc) throws SQLException {
-    	int filas = 0;
-    	for (MascotaDTO masc : listaMasc) {
-        	filas += insertMasc(masc);
-    	}
-    	return filas;
-	}
-    
-	public int deleteMasc() throws SQLException {
-    	String sql = "delete from mascotas where idMascota=?";
+    public int insertMasc(List<MascotaDTO> listaMasc) throws SQLException {
+        int filas = 0;
+        for (MascotaDTO masc : listaMasc) {
+            filas += insertMasc(masc);
+        }
+        return filas;
+    }
 
-    	int nfilas = 0;
+    public int deleteMasc() throws SQLException {
+        String sql = "delete from mascotas where idMascota=?";
 
-    	try (Statement st = con.createStatement()) {
-        	nfilas = st.executeUpdate(sql);
-    	}
-    	return nfilas;
-	}
+        int nfilas = 0;
 
-	public int deleteMasc(MascotaDTO masc) throws SQLException {
-    	int numFilas = 0;
+        try (Statement st = con.createStatement()) {
+            nfilas = st.executeUpdate(sql);
+        }
+        return nfilas;
+    }
 
-    	String sql = "delete from mascotas where pk = ?";
+    public int deleteMasc(MascotaDTO masc) throws SQLException {
+        int numFilas = 0;
 
-    	try (PreparedStatement prest = con.prepareStatement(sql)) {
-        	prest.setInt(1, masc.getIdMasc());
-        	numFilas = prest.executeUpdate();
-    	}
-    	return numFilas;
-	}
+        String sql = "delete from mascotas where idMascota = ?";
 
-	public int updateMasc(int idMasc, MascotaDTO nuevosDatosMasc) throws SQLException {
-    	int numFilas = 0;
-    	String sql = "update mascotas set idMascota=?, numChip=?, nombre=?, peso=?, fechaNacim=?, tipo=?, idVeterinario=?";
+        try (PreparedStatement prest = con.prepareStatement(sql)) {
+            prest.setInt(1, masc.getIdMasc());
+            numFilas = prest.executeUpdate();
+        }
+        return numFilas;
+    }
 
-    	if (findByPk(idMasc) == null) {
-        	return numFilas;
-    	} else {
+    public int updateMasc(int idMascota, MascotaDTO nuevosDatosMasc) throws SQLException {
+        int numFilas = 0;
+        String sql = "update mascotas set numChip=?, nombre=?, peso=?, fechaNacim=?, tipo=?, idVeterinario=? where idMascota=?";
 
-        	try (PreparedStatement prest = con.prepareStatement(sql)) {
+        if (findByPk(idMascota) == null) {
+            System.out.println("No se encontró la mascota con id " + idMascota);
+            return numFilas;
+        } else {
+            System.out.println("Entra a la modificacion");
+            try (PreparedStatement prest = con.prepareStatement(sql)) {
 
-            	prest.setInt(1, nuevosDatosMasc.getIdMasc());
-            	prest.setInt(2, nuevosDatosMasc.getNumChip());
-            	prest.setString(3, nuevosDatosMasc.getNombreMasc());
-            	prest.setDate(4, Date.valueOf(nuevosDatosMasc.getFechaNacim()));
-            	prest.setDouble(5, nuevosDatosMasc.getPeso());
-            	prest.setString(6, nuevosDatosMasc.getTipo());
-                prest.setInt(7, nuevosDatosMasc.getIdVet());
+                prest.setString(2, nuevosDatosMasc.getNombreMasc());
+                prest.setInt(1, nuevosDatosMasc.getNumChip());
+                prest.setDate(4, Date.valueOf(nuevosDatosMasc.getFechaNacim()));
+                prest.setDouble(3, nuevosDatosMasc.getPeso());
+                prest.setString(5, nuevosDatosMasc.getTipo());
+                prest.setInt(6, nuevosDatosMasc.getIdVet());
+                prest.setInt(7, idMascota);
 
-            	numFilas = prest.executeUpdate();
-        	}
-        	return numFilas;
-    	}
-	}
+                numFilas = prest.executeUpdate();
+                System.out.println("Número de filas modificadas: " + numFilas);
+            }
+            return numFilas;
+        }
+    }
 
-	public List<MascotaDTO> obtenerMascotasPorVeterinario(int idVet) throws SQLException {
-    	List<MascotaDTO> lista = new ArrayList<>();
-    	String sql = "SELECT * FROM mascotas WHERE idVeterinario = ?";
-    	try (PreparedStatement stmt = con.prepareStatement(sql)) {
-        	stmt.setInt(1, idVet);
-        	ResultSet rs = stmt.executeQuery();
-        	while (rs.next()) {
-            	MascotaDTO masc = new MascotaDTO();
-            	masc.setIdMasc(rs.getInt("idMasc"));
+    public List<MascotaDTO> obtenerMascotasPorVeterinario(int idVet) throws SQLException {
+        List<MascotaDTO> lista = new ArrayList<>();
+        String sql = "SELECT * FROM mascotas WHERE idVeterinario = ?";
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, idVet);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                MascotaDTO masc = new MascotaDTO();
+                masc.setIdMasc(rs.getInt("idMascota"));
+                masc.setIdVet(rs.getInt("idVeterinario"));
+                masc.setNombreMasc(rs.getString("nombre"));
                 masc.setNumChip(rs.getInt("numChip"));
-            	masc.setNombreMasc(rs.getString("nombre"));
-            	masc.setPeso(rs.getDouble("peso"));
-            	masc.setFechaNacim(rs.getDate("fecha_nac").toLocalDate());
-            	masc.setTipo(rs.getString("tipo"));
-                masc.setIdVet(rs.getInt("idVet"));
+                masc.setFechaNacim(rs.getDate("fechaNacim").toLocalDate());
+                masc.setPeso(rs.getDouble("peso"));
+                masc.setTipo(rs.getString("tipo"));
 
-            	lista.add(masc);
-        	}
-    	}
-    	return lista;
-	}
+                lista.add(masc);
+            }
+        }
+        return lista;
+    }
 }
-
-
-

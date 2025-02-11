@@ -12,10 +12,10 @@ public class MascotaDTO {
     private double peso;
     private String tipo;
 
-    public MascotaDTO(int idMasc, int idVet, String nombreMasc, int numChip, LocalDate fechaNacim, double peso, String tipo) {
+    public MascotaDTO(int idMasc, int idVet, String nombre, int numChip, LocalDate fechaNacim, double peso, String tipo) {
         this.idMasc = idMasc;
         this.idVet = idVet;
-        this.nombreMasc = nombreMasc;
+        this.nombreMasc = nombre;
         this.numChip = numChip;
         this.fechaNacim = fechaNacim;
         this.peso = peso;

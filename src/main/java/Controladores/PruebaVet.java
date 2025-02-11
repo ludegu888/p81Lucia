@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Prueba {
+public class PruebaVet {
 	public static void main(String[] args) {
 
     	VeterinarioDAO daoVet = new VeterinarioDAO();
@@ -37,7 +37,7 @@ public class Prueba {
         	System.out.println("-----------------------------------------");
         	System.out.println("Modificación de la persona con pk 5");
         	System.out.println("Nº Personas modificadas: " +
-        	daoVet.updateVet(24,new VeterinarioDTO(24,"Penelope","232312a","C/ Pino","323122","p@gmail.com")));
+        	daoVet.updateVet(24,new VeterinarioDTO(7,"Penelope","232312a","C/ Pino","323122","p@gmail.com")));
         	System.out.println("-----------------------------------------");
         	nuevaLista = daoVet.getAll();
         	System.out.println("-------- Lista con datos recogidos desde la B.D despues de modificar una persona -------------");

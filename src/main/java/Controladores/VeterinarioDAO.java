@@ -142,7 +142,7 @@ public class VeterinarioDAO implements Modelos.IVeterinario {
                 prest.setString(3, nuevosDatosVet.getDireccion());
                 prest.setString(4, nuevosDatosVet.getTelefono());
                 prest.setString(5, nuevosDatosVet.getEmail());
-                prest.setInt(6, nuevosDatosVet.getIdVet());
+                prest.setInt(6, idVet);
 
                 numFilas = prest.executeUpdate();
             }

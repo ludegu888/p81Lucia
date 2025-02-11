@@ -2,10 +2,11 @@ Conexion/Conexion.class
 Modelos/IVeterinario.class
 Conexion/P81Lucia.class
 Modelos/IMascota.class
+Controladores/PruebaMasc.class
 Controladores/MascotaDAO.class
 Modelos/MascotaDTO.class
 Modelos/VeterinarioDTO.class
+Controladores/PruebaVet.class
 Vistas/Main.class
 Controladores/VeterinarioDAO.class
-Controladores/Prueba.class
 Conexion/Prueba.class
