@@ -20,18 +20,18 @@ public class PruebaMasc {
             System.out.println("Nº mascotas insertadas " + daoMasc.insertMasc(listaMasc));
             System.out.println("-----------------------------------------");
             System.out.println("Comprobamos en una nueva lista que se recogen los datos desde la tabla.");
-            List<MascotaDTO> nuevaLista = daoMasc.getAll();
+            List<MascotaDTO> nuevaLista = daoMasc.listaMasc();
             System.out.println("-------- Lista con datos recogidos desde la B.D -------------");
             nuevaLista.forEach(System.out::println);
             System.out.println("-----------------------------------------");
             System.out.println("Mascota con primary key 1: ");
-            System.out.println(daoMasc.findByPk(14));
+            System.out.println(daoMasc.buscarPorId(14));
             System.out.println("-----------------------------------------");
             System.out.println("Se va a borrar la mascota con pk 3");
             System.out.println("Nº mascotas borradas "
                     + daoMasc.deleteMasc(new MascotaDTO(14, 2, "Salem", 54132, LocalDate.of(2018, 12, 20), 5.0, "gato")));
             System.out.println("-----------------------------------------");
-            nuevaLista = daoMasc.getAll();
+            nuevaLista = daoMasc.listaMasc();
             System.out.println("-------- Lista con datos recogidos desde la B.D despues de borrar una mascota -------------");
             nuevaLista.forEach(System.out::println);
             System.out.println("-----------------------------------------");
@@ -39,7 +39,7 @@ public class PruebaMasc {
             System.out.println("Nº mascotas modificadas: "
                     + daoMasc.updateMasc(20, new MascotaDTO(7, 2, "Riku", 35213, LocalDate.of(2022, 06, 13), 4.6, "gato")));
             System.out.println("-----------------------------------------");
-            nuevaLista = daoMasc.getAll();
+            nuevaLista = daoMasc.listaMasc();
             System.out.println("---- LIsta obtenerMascotasPorVeterinario con idVet = 1 ----");
             List<MascotaDTO> mascotasVeterinario = daoMasc.obtenerMascotasPorVeterinario(1);
             System.out.println("Mascotas asociadas al veterinario con id 1:");
@@ -53,15 +53,5 @@ public class PruebaMasc {
         }
         System.out.println("-------- Lista original --------------------");
         listaMasc.forEach(System.out::println);
-
-        System.out.println("Mascota con primary key 20: ");
-        MascotaDTO mascota = daoMasc.findByPk(20);
-        if (mascota != null) {
-            System.out.println(mascota);
-        } else {
-            System.out.println("No se encontró la mascota con id 20.");
-        }
-
     }
-
 }

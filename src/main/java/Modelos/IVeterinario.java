@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IVeterinario {
     
-    List<VeterinarioDTO> getAll() throws SQLException;
+    List<VeterinarioDTO> listaVet() throws SQLException;
     
-    VeterinarioDTO findByPk(int id) throws SQLException;
+    VeterinarioDTO buscarPorId(int id) throws SQLException;
     
     int insertVet(VeterinarioDTO vet) throws SQLException;
     
@@ -16,7 +16,7 @@ public interface IVeterinario {
     
     int deleteVet(VeterinarioDTO vet) throws SQLException;
     
-    int deleteVet() throws SQLException;
+    int deleteVet(int idVeterinario) throws SQLException;
     
     int updateVet(int idVet, VeterinarioDTO nuevoDatosVet) throws SQLException;
 }

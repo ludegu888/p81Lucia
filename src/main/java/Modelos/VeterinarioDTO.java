@@ -2,14 +2,14 @@ package Modelos;
 
 public class VeterinarioDTO {
 
-    private int idVet;
+    private Integer idVet;
     private String nombreVet;
     private String nifVet;
     private String direccion;
     private String telefono;
     private String email;
 
-    public VeterinarioDTO(int idVet, String nombreVet, String nifVet, String direccion, String telefono, String email) {
+    public VeterinarioDTO(Integer idVet, String nombreVet, String nifVet, String direccion, String telefono, String email) {
         this.idVet = idVet;
         this.nombreVet = nombreVet;
         this.nifVet = nifVet;
@@ -25,7 +25,7 @@ public class VeterinarioDTO {
         return idVet;
     }
 
-    public void setIdVet(int idVet) {
+    public void setIdVet(Integer idVet) {
         this.idVet = idVet;
     }
 
@@ -79,7 +79,7 @@ public class VeterinarioDTO {
         sb.append(", direccion=").append(direccion);
         sb.append(", telefono=").append(telefono);
         sb.append(", email=").append(email);
-        sb.append('}');
+        sb.append('}' + "\n");
         return sb.toString();
     }
 }

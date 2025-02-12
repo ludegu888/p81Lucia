@@ -11,6 +11,10 @@ import java.util.List;
 import Modelos.VeterinarioDTO;
 
 public class VeterinarioDAO implements Modelos.IVeterinario {
+
+    public static VeterinarioDTO buscar(int idVeterinario) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     private Connection con = null;
 
@@ -18,7 +22,7 @@ public class VeterinarioDAO implements Modelos.IVeterinario {
         con = Conexion.getInstance();
     }
 
-    public List<VeterinarioDTO> getAll() throws SQLException {
+    public List<VeterinarioDTO> listaVet() throws SQLException {
         List<VeterinarioDTO> listaVet = new ArrayList<>();
 
         try (Statement st = con.createStatement()) {
@@ -37,7 +41,7 @@ public class VeterinarioDAO implements Modelos.IVeterinario {
         return listaVet;
     }
 
-    public VeterinarioDTO findByPk(int id) throws SQLException {
+    public VeterinarioDTO buscarPorId(int id) throws SQLException {
 
         ResultSet res = null;
         VeterinarioDTO vet = new VeterinarioDTO();
@@ -67,7 +71,7 @@ public class VeterinarioDAO implements Modelos.IVeterinario {
         int numFilas = 0;
         String sql = "insert into veterinarios(idVeterinario,nombreVet,nifVet,direccion,telefono,email) values (?,?,?,?,?,?)";
 
-        if (findByPk(vet.getIdVet()) != null) {
+        if (buscarPorId(vet.getIdVet()) != null) {
             return numFilas;
         } else {
             try (PreparedStatement prest = con.prepareStatement(sql)) {
@@ -97,7 +101,7 @@ public class VeterinarioDAO implements Modelos.IVeterinario {
         }
     }
 
-    public int deleteVet() throws SQLException {
+    public int deleteVet(int idVeterinario) throws SQLException {
 
         String sql = "delete from veterinarios where idVeterinario=?";
 
@@ -130,7 +134,7 @@ public class VeterinarioDAO implements Modelos.IVeterinario {
         int numFilas = 0;
         String sql = "update veterinarios set nombreVet=?, nifVet=?, direccion=?,telefono=?,email=? where idVeterinario =?";
 
-        if (findByPk(idVet) == null) {
+        if (buscarPorId(idVet) == null) {
 
             return numFilas;
         } else {

@@ -20,18 +20,18 @@ public class PruebaVet {
         	System.out.println("Nº personas insertadas " + daoVet.insertVet(listaVet));
         	System.out.println("-----------------------------------------");
         	System.out.println("Comprobamos en una nueva lista que se recogen los datos desde la tabla.");
-        	List<VeterinarioDTO> nuevaLista = daoVet.getAll();
+        	List<VeterinarioDTO> nuevaLista = daoVet.listaVet();
         	System.out.println("-------- Lista con datos recogidos desde la B.D -------------");
         	nuevaLista.forEach(System.out::println);
         	System.out.println("-----------------------------------------");
         	System.out.println("Persona con primary key 1: ");
-        	System.out.println(daoVet.findByPk(15));
+        	System.out.println(daoVet.buscarPorId(15));
         	System.out.println("-----------------------------------------");
         	System.out.println("Se va a borrar la persona con pk 3");
         	System.out.println("Nº personas borradas " +
                 	daoVet.deleteVet(new VeterinarioDTO(15,"Paco","424212a","C/ Amapola", "689458121", "paco@gmail.com")));
         	System.out.println("-----------------------------------------");
-        	nuevaLista = daoVet.getAll();
+        	nuevaLista = daoVet.listaVet();
         	System.out.println("-------- Lista con datos recogidos desde la B.D despues de borrar una persona -------------");
         	nuevaLista.forEach(System.out::println);
         	System.out.println("-----------------------------------------");
@@ -39,7 +39,7 @@ public class PruebaVet {
         	System.out.println("Nº Personas modificadas: " +
         	daoVet.updateVet(24,new VeterinarioDTO(7,"Penelope","232312a","C/ Pino","323122","p@gmail.com")));
         	System.out.println("-----------------------------------------");
-        	nuevaLista = daoVet.getAll();
+        	nuevaLista = daoVet.listaVet();
         	System.out.println("-------- Lista con datos recogidos desde la B.D despues de modificar una persona -------------");
         	nuevaLista.forEach(System.out::println);
     	} catch (SQLException sqle) {

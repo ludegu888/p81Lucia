@@ -1,18 +1,19 @@
 package Modelos;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class MascotaDTO {
 
     private int idMasc;
-    private int idVet;
+    private Integer idVet;
     private String nombreMasc;
     private int numChip;
     private LocalDate fechaNacim;
     private double peso;
     private String tipo;
 
-    public MascotaDTO(int idMasc, int idVet, String nombre, int numChip, LocalDate fechaNacim, double peso, String tipo) {
+    public MascotaDTO(int idMasc, Integer idVet, String nombre, int numChip, LocalDate fechaNacim, double peso, String tipo) {
         this.idMasc = idMasc;
         this.idVet = idVet;
         this.nombreMasc = nombre;
@@ -33,11 +34,11 @@ public class MascotaDTO {
         this.idMasc = idMasc;
     }
 
-    public int getIdVet() {
+    public Integer getIdVet() {
         return idVet;
     }
 
-    public void setIdVet(int idVet) {
+    public void setIdVet(Integer idVet) {
         this.idVet = idVet;
     }
 
@@ -92,7 +93,7 @@ public class MascotaDTO {
         sb.append(", fechaNacim=").append(fechaNacim);
         sb.append(", peso=").append(peso);
         sb.append(", tipo=").append(tipo);
-        sb.append('}');
+        sb.append('}'+"\n");
         return sb.toString();
     }
 }

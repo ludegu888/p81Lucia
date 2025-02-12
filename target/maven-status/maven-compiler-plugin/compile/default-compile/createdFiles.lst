@@ -7,6 +7,6 @@ Controladores/MascotaDAO.class
 Modelos/MascotaDTO.class
 Modelos/VeterinarioDTO.class
 Controladores/PruebaVet.class
-Vistas/Main.class
+Vistas/Programa.class
 Controladores/VeterinarioDAO.class
 Conexion/Prueba.class
