@@ -15,7 +15,7 @@ public class VeterinarioDAO implements Modelos.IVeterinario {
     public static VeterinarioDTO buscar(int idVeterinario) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     private Connection con = null;
 
     public VeterinarioDAO() {
@@ -41,15 +41,15 @@ public class VeterinarioDAO implements Modelos.IVeterinario {
         return listaVet;
     }
 
-    public VeterinarioDTO buscarPorId(int id) throws SQLException {
+    public VeterinarioDTO buscarPorId(int idVet) throws SQLException {
 
         ResultSet res = null;
         VeterinarioDTO vet = new VeterinarioDTO();
 
-        String sql = "select * from veterinarios where idVeterinario = ?";
+        String sql = "select * from veterinarios where idVeterinario=?";
 
-        try ( PreparedStatement prest = con.prepareStatement(sql)) {
-            prest.setInt(1, id);
+        try (PreparedStatement prest = con.prepareStatement(sql)) {
+            prest.setInt(1, idVet);
 
             res = prest.executeQuery();
 
@@ -102,17 +102,28 @@ public class VeterinarioDAO implements Modelos.IVeterinario {
     }
 
     public int deleteVet(int idVeterinario) throws SQLException {
-
+        
+        String actualizarMasc = "update mascotas set idVeterinario=null where idVeterinario=?";
         String sql = "delete from veterinarios where idVeterinario=?";
 
-        int nfilas;
+        int nfilas = 0;
+        if (buscarPorId(idVeterinario) != null) {
 
-        try (Statement st = con.createStatement()) {
-            nfilas = st.executeUpdate(sql);
+            try (PreparedStatement deleteVet = con.prepareStatement(actualizarMasc)) {
+
+                deleteVet.setInt(1, idVeterinario);
+                nfilas = deleteVet.executeUpdate();
+            }
+            try (PreparedStatement actMas = con.prepareStatement(sql)) {
+
+                actMas.setInt(1, idVeterinario);
+
+                nfilas = actMas.executeUpdate();
+            }
         }
         return nfilas;
     }
-
+    
     public int deleteVet(VeterinarioDTO vet) throws SQLException {
         int numFilas;
 
